@@ -25,7 +25,7 @@ function App() {
           </Route>
           <Route exact path='/product'>
             <Product image={{ mainImage, setMainImage, stopMainImage }} />
-          </Route>{' '}
+          </Route>
         </Switch>
       </Router>
     </div>

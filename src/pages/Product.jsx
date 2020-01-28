@@ -17,7 +17,7 @@ function Product(props) {
       transform: 'translate(-80%, -50%)'
     })
 
-    return () => stopMainImage
+    return () => stopMainImage()
   }, [setMainImage, stopMainImage])
 
   return (

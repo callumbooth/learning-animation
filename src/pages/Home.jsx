@@ -15,7 +15,7 @@ function Home(props) {
       clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
       transform: 'translate(-50%, -50%)'
     })
-    return () => stopMainImage
+    return () => stopMainImage()
   }, [setMainImage, stopMainImage])
 
   // const image = useSpring({
