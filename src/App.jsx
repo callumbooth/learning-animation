@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useSpring } from 'react-spring'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -8,7 +8,6 @@ import Product from './pages/Product'
 import './App.scss'
 
 function App() {
-  const mainImageObj = useRef()
   const [mainImage, setMainImage, stopMainImage] = useSpring(() => ({
     width: '200%',
     height: '200%',
@@ -17,18 +16,16 @@ function App() {
     config: { tension: 30, friction: 12 }
   }))
 
-  mainImageObj.current = { mainImage, setMainImage, stopMainImage }
-
   return (
     <div className='App'>
       <Router>
         <Switch>
           <Route exact path='/'>
-            <Home mainImage={mainImageObj.current} />
+            <Home mainImage={{ mainImage, setMainImage, stopMainImage }} />
           </Route>
           <Route exact path='/product'>
-            <Product image={mainImageObj.current} />
-          </Route>
+            <Product image={{ mainImage, setMainImage, stopMainImage }} />
+          </Route>{' '}
         </Switch>
       </Router>
     </div>

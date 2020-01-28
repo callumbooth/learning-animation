@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
@@ -13,15 +13,27 @@ function App() {
     config: { tension: 30, friction: 12 }
   }))
 
-  const image = useSpring({
-    to: {
-      transform: 'translate(0, 0)'
-    },
-    from: {
-      transform: 'translate(20%, 0)'
-    },
-    config: { tension: 280, friction: 150 },
-    delay: 2000
+  // const image = useSpring({
+  //   to: {
+  //     transform: 'translate(0, 0)'
+  //   },
+  //   from: {
+  //     transform: 'translate(20%, 0)'
+  //   },
+  //   config: { tension: 280, friction: 150 },
+  //   delay: 2000
+  // })
+
+  useEffect(() => {
+    setMainImage({
+      width: '75%',
+      height: '50%',
+      clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+      transform: 'translate(-50%, -50%)'
+    })
+    return () => {
+      stopMainImage()
+    }
   })
 
   return (
@@ -30,19 +42,19 @@ function App() {
         <Switch>
           <Route exact path='/'>
             {() => {
-              stopMainImage()
               setMainImage({
                 width: '75%',
                 height: '50%',
                 clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
                 transform: 'translate(-50%, -50%)'
               })
+              console.log('here')
               return (
                 <>
                   Some title
                   <animated.div className='main-wrapper' style={mainImage}>
                     <Link to='/product'>
-                      <animated.div className='main-image' styles={image} />
+                      <animated.div className='main-image' />
                     </Link>
                   </animated.div>
                 </>

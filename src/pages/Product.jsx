@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { animated } from 'react-spring'
 import { Link } from 'react-router-dom'
 
 import '../App.scss'
 
-function App(props) {
+function Product(props) {
   const {
     image: { mainImage, setMainImage, stopMainImage }
   } = props
 
-  stopMainImage()
-  setMainImage({
-    width: '35%',
-    height: '50%',
-    clipPath: 'polygon(0% 10%, 100% 0%, 100% 80%, 0% 100%)',
-    transform: 'translate(-80%, -50%)'
-  })
+  useEffect(() => {
+    setMainImage({
+      width: '35%',
+      height: '50%',
+      clipPath: 'polygon(0% 10%, 100% 0%, 100% 80%, 0% 100%)',
+      transform: 'translate(-80%, -50%)'
+    })
+
+    return () => stopMainImage
+  }, [setMainImage, stopMainImage])
 
   return (
     <>
@@ -29,4 +32,4 @@ function App(props) {
   )
 }
 
-export default App
+export default Product
